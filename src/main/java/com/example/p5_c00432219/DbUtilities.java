@@ -53,7 +53,12 @@ public class DbUtilities {
     public List<String> showCountriesSpeaking(String language) {
         // connect to db
         String url = "jdbc:h2:tcp://localhost/~/world";
-
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         // query database
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()) {
@@ -84,7 +89,12 @@ public class DbUtilities {
     public List<String> showCityInfo(String cityName) {
         // connect to db
         String url = "jdbc:h2:tcp://localhost/~/world";
-
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         // query database
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()) {
@@ -124,14 +134,19 @@ public class DbUtilities {
         }
     }
 
-    public List<String> showCitiesInCountry(String country) {
+    public ArrayList<String> showCitiesInCountry(String country) {
         // ******************************************************
         // ****************  Connecting to datatbase  ***********
         // ******************************************************
 
         // URL for local database
         String url = "jdbc:h2:tcp://localhost/~/world";
-
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         // make a connection and statement objects linked to the DBMS
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()) {
@@ -169,7 +184,12 @@ public class DbUtilities {
     public List<String> showCountriesStartingWithLetter(String letter) {
         // connect to db
         String url = "jdbc:h2:tcp://localhost/~/world";
-
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         // query database
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()) {
