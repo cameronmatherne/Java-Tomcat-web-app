@@ -74,11 +74,11 @@ public class DbUtilities {
                 e.printStackTrace();
             }
 
-            String countries = "";
+            List<String> countries = new ArrayList<>();
             while (result.next()) {
-                countries += result.getString(1) + "\n";
+                countries.add(result.getString(1));
             }
-            return null;
+            return countries;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,53 +86,8 @@ public class DbUtilities {
         }
     }
 
-    public List<String> showCityInfo(String cityName) {
-        // connect to db
-        String url = "jdbc:h2:tcp://localhost:9092/~/world";
-        try {
-            Class.forName("org.h2.Driver");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        // query database
-        try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement()) {
-
-            ResultSet result = null;
-            try {
-                result = statement.executeQuery("" +
-                        "SELECT CITY.NAME, CITY.POPULATION, CITY.DISTRICT, CITY.COUNTRYCODE " +
-                        "FROM CITY " +
-                        "WHERE CITY.NAME = '" + cityName + "'");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            String cityInfo = "";
-
-            while (result.next()) {
-                String countryCode = result.getString("COUNTRYCODE");
-                String countryName = getCountryName(countryCode);
-                cityInfo += String.format("%s%s%s%s%s\n",
-                        "Name: " + result.getString(1) + "\n",
-                        "Population: " + result.getString(2) + "\n",
-                        "District: " + result.getString(3) + "\n",
-                        "Country-code: " + countryCode + "\n",
-                        // FIX THIS
-                        "Country name: " + countryName + "\n");
 
 
-            }
-            System.out.println(cityInfo);
-            return null;
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public ArrayList<String> showCitiesInCountry(String country) {
         // URL for local database
@@ -186,16 +141,19 @@ public class DbUtilities {
                 e.printStackTrace();
             }
 
-            String countries = "";
+            List<String> countries = new ArrayList<>();
             while (result.next()) {
-                countries += result.getString(1) + "\n";
+                countries.add(result.getString(1));
             }
 
-            return null;
+            return countries;
 
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
+
 }

@@ -12,6 +12,36 @@
         Enter a Country:
         <input type="text" name="country">
         <input type="submit" value="Submit">
+        <br>
+        <br>
+
+        Expanded city information<br>
+        Enter a city:
+        <input type="text" name="country">
+        <input type="submit" value="Submit">
+        <br>
+        <br>
+
+        Countries on continent:<br>
+        Enter a continent
+        <input type="text" name="country">
+        <input type="submit" value="Submit">
+        <br>
+        <br>
+
+        Countries speaking language<br>
+        Enter a language:
+        <input type="text" name="country">
+        <input type="submit" value="Submit">
+        <br>
+        <br>
+
+        Countries starting with letter<br>
+        Enter a letter:
+        <input type="text" name="country">
+        <input type="submit" value="Submit">
+        <br>
+        <br>
     </form>
 </div>
 </body>
