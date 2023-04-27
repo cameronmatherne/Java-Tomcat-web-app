@@ -16,7 +16,7 @@ public class DbUtilities {
         }
 
         // URL for local database
-        String url = "jdbc:h2:tcp://localhost/~/world";
+        String url = "jdbc:h2:tcp://localhost:9092/~/world";
 
         // make a connection and statement objects linked to the DBMS
         try (Connection connection = DriverManager.getConnection(url);
@@ -52,7 +52,7 @@ public class DbUtilities {
 
     public List<String> showCountriesSpeaking(String language) {
         // connect to db
-        String url = "jdbc:h2:tcp://localhost/~/world";
+        String url = "jdbc:h2:tcp://localhost:9092/~/world";
         try {
             Class.forName("org.h2.Driver");
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class DbUtilities {
 
     public List<String> showCityInfo(String cityName) {
         // connect to db
-        String url = "jdbc:h2:tcp://localhost/~/world";
+        String url = "jdbc:h2:tcp://localhost:9092/~/world";
         try {
             Class.forName("org.h2.Driver");
         } catch (Exception e) {
@@ -135,45 +135,27 @@ public class DbUtilities {
     }
 
     public ArrayList<String> showCitiesInCountry(String country) {
-        // ******************************************************
-        // ****************  Connecting to datatbase  ***********
-        // ******************************************************
-
         // URL for local database
-        String url = "jdbc:h2:tcp://localhost/~/world";
+        String url = "jdbc:h2:tcp://localhost:9092/~/world";
         try {
             Class.forName("org.h2.Driver");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        // make a connection and statement objects linked to the DBMS
+
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()) {
+            ResultSet result = statement.executeQuery("" +
+                    "SELECT CITY.NAME " +
+                    "FROM CITY, COUNTRY " +
+                    "WHERE COUNTRY.NAME='" + country + "' AND COUNTRY.CODE=CITY.COUNTRYCODE");
 
-
-            // ******************************************************
-            // ****************  Querying datatbase  ****************
-            // ******************************************************
-
-            ResultSet result = null;
-            try {
-                result = statement.executeQuery("" +
-                        "SELECT CITY.NAME " +
-                        "FROM CITY, COUNTRY " +
-                        "WHERE COUNTRY.NAME='" + country + "' AND COUNTRY.CODE=CITY.COUNTRYCODE");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            //List<String> cities = new ArrayList<>();
-            String cities = "";
+            ArrayList<String> cities = new ArrayList<>();
             while (result.next()) {
-                cities += String.format("%s \n",
-                        result.getString(1));
-
+                cities.add(result.getString(1));
             }
-            return null;
+            return cities;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,7 +165,7 @@ public class DbUtilities {
 
     public List<String> showCountriesStartingWithLetter(String letter) {
         // connect to db
-        String url = "jdbc:h2:tcp://localhost/~/world";
+        String url = "jdbc:h2:tcp://localhost:9092/~/world";
         try {
             Class.forName("org.h2.Driver");
         } catch (Exception e) {
